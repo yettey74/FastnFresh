@@ -1,0 +1,46 @@
+/* CSS Document */
+.special-search-box{
+        width: 300px;
+        position: relative;
+        display: inline-block;
+        font-size: 14px;
+}
+.special-search-box input[type="text"]{
+	height: 32px;
+	padding: 5px 10px;
+	border: 1px solid #CCCCCC;
+	font-size: 14px;
+	text-color: black;
+	background-color: green; /* For browsers that do not support gradients */
+	background-image: -webkit-linear-gradient(top left, green, yellow);
+	background-image: -o-linear-gradient(top left, green, yellow);
+	background-image: linear-gradient(to bottom right, green, yellow);
+}
+.result{
+	position: absolute;        
+	z-index: 999;
+	top: 100%;
+	left: 0;
+}
+.special-search-box input[type="text"], .result{
+	width: 100%;
+	box-sizing: border-box;
+	filter:alpha(opacity=150); /* IE */
+	-moz-opacity:1.5; /* Mozilla */
+	opacity: 1.5; /* CSS3 */
+}
+/* Formatting result items */
+.result p{
+	margin: 0;
+	padding: 7px 10px;
+	border: 1px solid #CCCCCC;
+	border-top: none;
+	cursor: pointer;
+	background-color: green; /* For browsers that do not support gradients */
+	background-image: -webkit-linear-gradient(left, green, yellow);
+	background-image: -o-linear-gradient(left, green, yellow);
+	background-image: linear-gradient(left, green, yellow);
+}
+.result p:hover{
+	background: orange;
+}

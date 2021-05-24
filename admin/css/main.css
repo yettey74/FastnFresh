@@ -1,0 +1,417 @@
+body {
+	width:100%;	
+}
+td {
+	text-align:center;
+	padding:10px;
+}
+table {
+	margin:auto;
+}
+input[type="text"] {
+	width:150px;
+    font-size: 18px;
+	background-color: #97f19e;
+    border: #08FF08 3px solid;
+    text-indent: 5px;
+	text-align: center;
+	cursor:pointer;
+}
+
+/*Remove arrows from numbr input*/
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+	/* Firefox */
+  -moz-appearance: textfield;
+	/* End firefox */
+	background-color: #97f19e;
+	background-image: linear-gradient(to right, #00ff00 , #Fedeb1, #Fedeb1);
+	width:70px;
+    font-size: 18px;
+    border: #08FF08 3px solid;
+	border-radius: 25px;
+    text-indent: 5px;
+	text-align: center;
+	cursor:pointer;
+}
+input[type="password"] {
+	width:150px;
+	background-color: #97f19e;
+    font-size: 18px;
+    border: blue 1px solid;
+    text-indent: 5px;
+	cursor:pointer;
+}
+
+input[type="email"] {
+	width:350px;
+    font-size: 18px;
+	background-color: #97f19e;
+    border: #08FF08 3px solid;
+    text-indent: 5px;
+	text-align: center;
+	cursor:pointer;
+}
+
+input[type="file"] {
+	width:200px;
+	background-color: #97f19e;
+    font-size: 14px;
+	padding: 5px;
+    border: #08FF08 3px solid;
+	border-radius: 25px;
+	text-align: center;
+	cursor:pointer;
+}
+
+span {
+  color: black; /* text colour before klick */
+}
+
+label > input[type="checkbox"] {
+  display: none;
+}
+
+label > input[type="radio"] {
+  display: none;
+}
+
+label > input[type="checkbox"] + *::before {
+  content: "";
+  display: inline-block;
+  vertical-align: bottom;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 10%;
+  border-style: solid;
+  border-width: 0.1rem;
+  border-color: gray;
+}
+
+
+label > input[type="checkbox"]:checked + *::before {
+  content: "✓"; /* you can change check logo here */
+  transform: scale(1.3); /* this is for check size */
+  color: #00ff00; /* check colour */
+  text-align: center;
+  background: #97f19e; /* check background colour */
+  border: #08FF08 3px solid;
+  border-color: black; /* check border colour */
+  border-style: solid;
+  border-width: 0.1rem;
+  padding: 5px;
+}
+label > input[type="checkbox"]:checked + * {
+  color: #00ff00; 
+}
+
+label > input[type="radio"] + *::before {
+  content: "";
+  display: inline-block;
+  vertical-align: bottom;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 10%;
+  border-style: solid;
+  border-width: 0.1rem;
+  border-color: gray;
+}
+
+label > input[type="radio"]:checked + *::before {
+  content: "✓"; /* you can cange check logo here */
+  transform: scale(0.7); /* this is for check size */
+  color: #00ff00; /* check colour */
+  text-align: center;
+  background: #97f19e; /* check background colour */
+  border: #08FF08 3px solid;
+  border-color: black; /* check border colour */
+  border-style: solid;
+  border-width: 0.1rem;
+}
+label > input[type="radio"]:checked + * {
+  color: #00ff00; 
+}
+
+input[type="checkbox"] {
+	width:15px;
+	height:15px;
+	color: #97f19e;
+	background-color: #97f19e;
+	background-image: linear-gradient(to right, #00ff00 , #Fedeb1, #Fedeb1);
+    font-size: 14px;
+	padding: 5px;
+    border: #08FF08 3px solid;
+	border-radius: 15px;
+	text-align: center;
+	cursor:pointer;
+}
+
+input[type='checkbox']:checked {
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+  color: #97f19e;
+  background-color: #97f19e;
+  background-image: linear-gradient(to left, #00ff00 , #Fedeb1, #Fedeb1);
+}
+
+input[type="radio"] {
+	width:25px;
+	background-color: #97f19e;
+	background-image: linear-gradient(to right, #00ff00 , #Fedeb1, #Fedeb1);
+    font-size: 14px;
+	padding: 5px;
+    border: #08FF08 3px solid;
+	border-radius: 25px;
+	text-align: center;
+	cursor:pointer;
+}
+
+input[type="submit"] {
+	color: black;
+	font-style: italic;
+	font-weight: 800;
+    border-radius: 5px;
+    border: 0;
+    width: 180px;
+    height: 40px;
+    font-family: Alegreya Sans;
+    background: #00ff00;
+    /* Old browsers */
+    background: -moz-linear-gradient(top right, #Fedeb1 50%, #00ff00 100%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(1%, #Fedeb1), color-stop(100%, #00ff00));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top right, #Fedeb1 50%, #00ff00 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top right, #Fedeb1 50%, #00ff00 100%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(top right, #Fedeb1 50%, #00ff00 100%);
+    /* IE10+ */
+    background: linear-gradient(to top right, #Fedeb1 50%, #00ff00 100%);
+    /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#Fedeb1', endColorstr='#00ff00', GradientType=0);
+    /* IE6-9 */
+}
+input[type="submit"]:hoover {
+	color: blue;
+	transition: 0.7;
+	font-style: italic;
+	font-weight: 1800;
+    border-radius: 25px;
+    border: 0;
+    width: 220px;
+    height: 50px;
+    font-family: Alegreya Sans;
+    background: #00ff00;
+    /* Old browsers */
+    background: -moz-linear-gradient(top right, #Fedeb1 50%, #00ff00 100%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(1%, #Fedeb1), color-stop(100%, #00ff00));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top right, #Fedeb1 50%, #00ff00 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top right, #Fedeb1 50%, #00ff00 100%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(top right, #Fedeb1 50%, #00ff00 100%);
+    /* IE10+ */
+    background: linear-gradient(to top right, #Fedeb1 50%, #00ff00 100%);
+    /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#Fedeb1', endColorstr='#00ff00', GradientType=0);
+    /* IE6-9 */
+}
+label {
+	font-size:18px;
+	color:black;
+    font-weight: bold;
+    font-family:  Alegreya Sans;
+}
+
+
+h2 {
+	color:red;
+	text-align:center;
+}
+
+#container{
+	background-color: darkgrey;
+}
+#header {
+	width: auto;
+	height: 200px;
+}
+
+.profile{
+	width: auto;
+	height: 200px;
+}
+
+.footer {
+	width: auto;
+	height: 200px;
+	align: bottom;
+}
+
+.submit_btn {
+	margin-right: 70px;
+    border: blue 1px solid;
+    font-size: 18px;
+    font-family: cursive;
+    padding: 5px;
+    font-weight: bold;
+    color: blue;
+    background: #00ff00;
+    border-radius: 25px;
+}
+.submit_btn:hover {
+	margin-right: 70px;
+    border: red 1px solid;
+    font-size: 18px;
+    font-family: cursive;
+    padding: 5px;
+    font-weight: bold;
+    color: green;
+    background: orange;
+    border-radius: 4px;
+	cursor:pointer;
+}
+.cancel_btn {
+    border: red 1px solid;
+    font-size: 18px;
+    font-family: cursive;
+    padding: 5px;
+    font-weight: bold;
+    color: red;
+    background: azure;
+    border-radius: 4px;
+}
+.cancel_btn:hover {
+    border: blue 1px solid;
+    font-size: 18px;
+    font-family: cursive;
+    padding: 5px;
+    font-weight: bold;
+    color: white;
+    background: red;
+    border-radius: 4px;
+	cursor:pointer;
+}
+
+.collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #555;
+}
+
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: #f1f1f1;
+}
+
+/* SEARCH */
+/* Formatting search box */
+.search-box{
+	width: 300px;
+	position: relative;
+	display: inline-block;
+	font-size: 14px;
+}
+.search-box input[type="text"]{
+	height: 32px;
+	padding: 5px 10px;
+	border: 1px solid #CCCCCC;
+	font-size: 14px;
+	text-color: black;
+	background-color: green; /* For browsers that do not support gradients */
+	background-image: -webkit-linear-gradient(top left, green, yellow);
+	background-image: -o-linear-gradient(top left, green, yellow);
+	background-image: linear-gradient(to bottom right, green, yellow);
+}
+.result{
+	position: absolute;        
+	z-index: 999;
+	top: 100%;
+	left: 0;
+}
+.search-box input[type="text"], .result{
+	width: 100%;
+	box-sizing: border-box;
+}
+/* Formatting result items */
+.result p{
+	margin: 0;
+	padding: 7px 10px;
+	border: 1px solid #CCCCCC;
+	border-top: none;
+	cursor: pointer;
+	background-color: green; /* For browsers that do not support gradients */
+	background-image: -webkit-linear-gradient(left, green, yellow);
+	background-image: -o-linear-gradient(left, green, yellow);
+	background-image: linear-gradient(left, green, yellow);
+}
+.result p:hover{
+	background: orange;
+}
+
+/* Formatting Admin search box */
+.admin-search-box{
+	width: 300px;
+	position: relative;
+	display: inline-block;
+	font-size: 14px;
+}
+.admin-search-box input[type="text"]{
+	height: 32px;
+	padding: 5px 10px;
+	border: 1px solid #CCCCCC;
+	font-size: 14px;
+	text-color: black;
+	background-color: green; /* For browsers that do not support gradients */
+	background-image: -webkit-linear-gradient(top left, green, yellow);
+	background-image: -o-linear-gradient(top left, green, yellow);
+	background-image: linear-gradient(to bottom right, green, yellow);
+}
+.orderResult{
+	position: absolute;        
+	z-index: 999;
+	top: 100%;
+	left: 0;
+}
+.admin-search-box input[type="text"], .orderResult{
+	width: 100%;
+	box-sizing: border-box;
+}
+/* Formatting result items */
+.orderResult p{
+	margin: 0;
+	padding: 7px 10px;
+	border: 1px solid #CCCCCC;
+	border-top: none;
+	cursor: pointer;
+	background-color: green; /* For browsers that do not support gradients */
+	background-image: -webkit-linear-gradient(left, green, yellow);
+	background-image: -o-linear-gradient(left, green, yellow);
+	background-image: linear-gradient(left, green, yellow);
+}
+.orderResult p:hover{
+	background: orange;
+}

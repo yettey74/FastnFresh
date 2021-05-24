@@ -1,0 +1,107 @@
+/* CSS Document */
+.erp{
+			padding: 20px;
+			border-spacing: 20px;
+			border-radius: 15px;
+			margin: 20px;
+			width: 250px;
+			height: 200px;
+		}
+		
+		#ass{			
+			background-color: lightsteelblue;			
+			padding: 20px;
+			border-spacing: 20px;
+			border-radius: 15px;
+			margin: 20px;
+			width: 250px;
+			height: 200px;
+			
+		}
+		
+		.ass{			
+			background-color: lightsteelblue;			
+			padding: 20px;
+			border-spacing: 20px;
+			border-radius: 15px;
+			margin: 20px;
+			width: 250px;
+			height: 200px;
+			text-align: center;
+			font-size: 16px;		
+		}
+		
+		.ass a{	
+			display: block;
+			padding: 20px 30px;
+			font-size: 25px;
+			text-decoration: none;
+			color: #ccc;	
+		}
+		
+		.ass a:hoover{			
+			background-color: lightcoral;
+			padding: 20px;
+			border-spacing: 20px;
+			border-radius: 15px;
+			margin: 20px;
+			width: 350px;
+			height: 300px;	
+			text-align: center;
+			font-size: 26px;
+			background-image: linear-gradient(to top right, #00ff00 , #Fedeb1, #Fedeb1);
+			margin: 30px;
+		}
+		
+		
+		#srm{			
+			background-color: lightgreen;
+		}
+		#recipe{			
+			background-color: lightgreen;
+		}
+		#storage{			
+			background-color: lightgreen;
+		}
+		#plm{
+			background-color: lightgreen;
+		}
+		#scm{
+			background-color: lightgreen;
+		}
+		#supplier{
+			background-color: lightsteelblue;
+		}
+		#acc{
+			background-color: lightsteelblue;
+		}
+		#crm{
+			background-color: lightsteelblue;
+		}
+		#sales{
+			background-color: lightsteelblue;
+		}
+		#market{
+			background-color: lightsteelblue;
+		}
+		#buildabox{
+			background-color: lightsteelblue;
+		}
+		#shop{
+			background-color: lightgreen;
+		}
+		#hrm{
+			background-color: palegoldenrod;
+		}
+		#cpg{
+			background-color: palegoldenrod;
+		}
+		#ohs{
+			background-color: palegoldenrod;
+		}
+		#train{
+			background-color: palegoldenrod;
+		}
+		#pay{
+			background-color: palegoldenrod;
+		}
