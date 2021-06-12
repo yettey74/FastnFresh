@@ -17,13 +17,13 @@ $cancelled = $conn->prepare("SELECT * FROM orders WHERE status = 'Cancelled'");
 $cancelled->execute();
 $cancelledCount = $cancelled->rowcount();
 
-$recipes = $conn->prepare("SELECT * FROM recipes WHERE status = '1'");
+/* $recipes = $conn->prepare("SELECT * FROM recipes WHERE status = '1'");
 $recipes->execute();
-$recipeCount = $recipes->rowcount();
+$recipeCount = $recipes->rowcount(); */
 
-$storage = $conn->prepare("SELECT * FROM storage WHERE status = '1'");
+/* $storage = $conn->prepare("SELECT * FROM storage WHERE status = '1'");
 $storage->execute();
-$storageCount = $storage->rowcount();
+$storageCount = $storage->rowcount(); */
 
 $produceSoldCountQ = $conn->prepare("SELECT DISTINCT(`pt`.`ptName` )
 								FROM `order_items` AS `oi` 
@@ -46,19 +46,19 @@ $ytd = $conn->query("SELECT SUM(grand_total) AS `total` FROM `orders`");
 $ytd->execute();
 $ytdSales = $ytd->fetch();
 
-$supplier_balance = $conn->query("SELECT ROUND(SUM(balance),2) AS `total` FROM `suppliers` WHERE `balance` IS NOT NULL");
+/* $supplier_balance = $conn->query("SELECT ROUND(SUM(balance),2) AS `total` FROM `suppliers` WHERE `balance` IS NOT NULL");
 $supplier_balance->execute();
-$supplierbalance = $supplier_balance->fetch();
+$supplierbalance = $supplier_balance->fetch(); */
 
-$monthly = $conn->prepare("SELECT YEAR(created_on) as year, MONTH(created_on) as month, SUM(grand_total) as total
+/* $monthly = $conn->prepare("SELECT YEAR(created_on) as year, MONTH(created_on) as month, SUM(grand_total) as total
 							 FROM `orders`
 							 GROUP BY YEAR(created_on), MONTH(created_on)
 							 ORDER BY YEAR(created_on), MONTH(created_on)");
-$monthly->execute();
+$monthly->execute(); */
 
-$supplier_balance = $conn->query("SELECT ROUND(SUM(balance),2) AS `total` FROM `suppliers` WHERE `balance` IS NOT NULL");
+/* $supplier_balance = $conn->query("SELECT ROUND(SUM(balance),2) AS `total` FROM `suppliers` WHERE `balance` IS NOT NULL");
 $supplier_balance->execute();
-$supplierbalance = $supplier_balance->fetch();
+$supplierbalance = $supplier_balance->fetch(); */
 
 /*$stocks = $conn->prepare("SELECT pt.variety_stock, pt.uom_id, pt.kilo, pt.box, pt.punnet, pt.bunch, pt.single, pt.bag, pt.tray, u.uomLong FROM producttype as pt LEFT JOIN uom as u on pt.uom_id = u.uom_id");
 $stocks->execute();
@@ -264,9 +264,9 @@ foreach( $stocks as $stock ){
 		  <br>
 		  <div><strong>Average Monthly Sales</strong></div>
 		  <?php
-		  foreach( $monthly as $sales){
+		/*   foreach( $monthly as $sales){
 			 echo '<div>' . date($sales['month']) . ' / ' . $sales['year'] . ' $' . $sales['total'] . ' </div>'; 
-		  }
+		  } */
 		  ?>
 	  </div>
 	  </a>
@@ -300,7 +300,7 @@ foreach( $stocks as $stock ){
 	  	<span style="font-size:22px; color:black; text-decoration: underline;">Assets</span>
 		<br><br>
 			<div>
-			  Total Asset Value $<?php echo ( totalAssetValue( $conn ) < 0 )? '<span style="color:red;">' . totalAssetValue( $conn ) : '<span style="color:green;">' . totalAssetValue( $conn ); ?>
+			  Total Asset Value $0
 			</div>			  
 		<br><br>
 		  <div>Total Compliance 0%</div>
@@ -311,7 +311,7 @@ foreach( $stocks as $stock ){
 	  	<span style="font-size:22px; color:black; text-decoration: underline;">Suppliers</span>
 		<br><br>
 		  <div>
-			  Supplier debit $<?php echo ($supplierbalance['total'] < 0 )? '<span style="color:red;">' . $supplierbalance['total'] : '<span style="color:blue;">' . $supplierbalance['total']; ?>
+			  Supplier debit $0
 			</div>		  
 		<br><br>
 	  </div>
@@ -333,7 +333,7 @@ foreach( $stocks as $stock ){
 	  <div class="erp" id="hrm" style="float: left;">
 	  	<span style="font-size:22px; color:black; text-decoration: underline;">Employees</span>
 		  <br>
-		  <div><?php echo getActiveCount( $conn, 'employee' ); ?> Employees are active</div>
+		  <div>5<?php //echo getActiveCount( $conn, 'employee' ); ?> Employees are active</div>
 	  </div>
 	  </a>
 <!--	  <a href="ohs.php">

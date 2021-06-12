@@ -30,7 +30,7 @@
 	foreach($_SESSION as $key=>$value){
 		//echo $key . '=>' . $value . '<br>';
 	}			
-	if( !isset( $_SESSION["loggedin"]) ){
+	/* if( !isset( $_SESSION["loggedin"]) ){
 		echo '<div style="text-align:center;">';
 		echo '<form method="post" action="login.php" name="signin-form">';
 		echo '<div class="form-element">
@@ -57,7 +57,7 @@
 		if( $_SESSION['access'] == 1 ){
 			echo '<a href="admin/door.php" style="text-decoration:none;">Admin</a>';			
 		}
-	}
+	} */
 	if( $page != "index.php" ){
 		echo '<a href="index.php" style="text-decoration:none;">Shopfront</a>';
 	}

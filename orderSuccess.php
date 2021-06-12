@@ -140,7 +140,7 @@ if( $orderDetails !== FALSE  ){
 						if($orderItemsR !== false) {
 	
 						foreach( $orderItemsR as $item ){
-								$uom = getUomLong( $conn, $item["uom_id"] );
+								$uom = getUomLong( $conn, $item["uomid"] );
                                 $price = $item["price"]; 
                                 $quantity = $item["quantity"]; 
                                 $sub_total = ( $price * $quantity ); 

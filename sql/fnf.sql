@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 26, 2021 at 11:15 AM
--- Server version: 10.4.13-MariaDB
--- PHP Version: 7.4.7
+-- Host: localhost
+-- Generation Time: Jun 12, 2021 at 06:52 AM
+-- Server version: 8.0.25
+-- PHP Version: 7.4.20RC1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ffp`
+-- Database: `fnf`
 --
 
 -- --------------------------------------------------------
@@ -28,11 +28,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `business` (
-  `bid` int(13) NOT NULL,
+  `bid` int NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `active` enum('1','0') NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -41,12 +41,12 @@ CREATE TABLE `business` (
 --
 
 CREATE TABLE `category` (
-  `cid` int(13) NOT NULL,
+  `cid` int NOT NULL,
   `categoryName` varchar(255) NOT NULL,
   `categoryImage` varchar(255) NOT NULL,
   `status` enum('1','0') NOT NULL DEFAULT '1',
   `archive` enum('1','0') NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `category`
@@ -67,16 +67,16 @@ INSERT INTO `category` (`cid`, `categoryName`, `categoryImage`, `status`, `archi
 --
 
 CREATE TABLE `customers` (
-  `id` int(11) NOT NULL,
-  `first_name` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `last_name` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `phone` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
-  `address` text COLLATE utf8_unicode_ci NOT NULL,
+  `id` int NOT NULL,
+  `first_name` varchar(25) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `last_name` varchar(25) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(15) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `address` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
-  `status` enum('1','0') COLLATE utf8_unicode_ci NOT NULL DEFAULT '1' COMMENT '1=Active | 0=Inactive'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `status` enum('1','0') CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '1' COMMENT '1=Active | 0=Inactive'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `customers`
@@ -92,7 +92,7 @@ INSERT INTO `customers` (`id`, `first_name`, `last_name`, `email`, `phone`, `add
 --
 
 CREATE TABLE `fnfbusiness` (
-  `business_ID` int(13) NOT NULL,
+  `business_ID` int NOT NULL,
   `businessName` varchar(40) DEFAULT NULL,
   `businessNameShort` varchar(30) DEFAULT NULL,
   `firstName` varchar(26) DEFAULT NULL,
@@ -129,7 +129,7 @@ CREATE TABLE `fnfbusiness` (
   `Resale Num` varchar(10) DEFAULT NULL,
   `Account No.` varchar(10) DEFAULT NULL,
   `Credit Limit` varchar(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `fnfbusiness`
@@ -242,7 +242,7 @@ INSERT INTO `fnfbusiness` (`business_ID`, `businessName`, `businessNameShort`, `
 --
 
 CREATE TABLE `fnfcustomer` (
-  `customer_ID` int(13) NOT NULL,
+  `customer_ID` int NOT NULL,
   `firstName` varchar(16) DEFAULT NULL,
   `lastName` varchar(15) DEFAULT NULL,
   `contact` varchar(24) DEFAULT NULL,
@@ -279,7 +279,7 @@ CREATE TABLE `fnfcustomer` (
   `Account No.` varchar(10) DEFAULT NULL,
   `Credit Limit` varchar(10) DEFAULT NULL,
   `active` enum('1','0') NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `fnfcustomer`
@@ -614,14 +614,22 @@ INSERT INTO `fnfcustomer` (`customer_ID`, `firstName`, `lastName`, `contact`, `p
 --
 
 CREATE TABLE `orders` (
-  `id` int(11) NOT NULL,
-  `customer_id` int(11) NOT NULL,
+  `id` int NOT NULL,
+  `customer_id` int NOT NULL,
   `grand_total` float(10,2) NOT NULL,
-  `created` datetime NOT NULL,
-  `status` enum('Pending','Delivery','Completed','Cancelled') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Pending'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `created_on` datetime NOT NULL,
+  `status` enum('Pending','Delivery','Completed','Cancelled') CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'Pending'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `orders`
+--
 
+INSERT INTO `orders` (`id`, `customer_id`, `grand_total`, `created_on`, `status`) VALUES
+(1, 333, 320.00, '2021-06-12 16:13:22', 'Pending'),
+(2, 333, 320.00, '2021-06-12 16:13:42', 'Pending'),
+(3, 333, 320.00, '2021-06-12 16:16:03', 'Pending'),
+(4, 333, 200.00, '2021-06-12 16:16:46', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -630,14 +638,22 @@ CREATE TABLE `orders` (
 --
 
 CREATE TABLE `order_items` (
-  `id` int(11) NOT NULL,
-  `order_id` int(11) NOT NULL,
-  `ptid` int(11) NOT NULL,
-  `quantity` int(5) NOT NULL,
+  `id` int NOT NULL,
+  `order_id` int NOT NULL,
+  `ptid` int NOT NULL,
+  `quantity` int NOT NULL,
   `price` float(8,2) NOT NULL,
-  `unit` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `uomid` int NOT NULL,
+  `status` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `order_items`
+--
+
+INSERT INTO `order_items` (`id`, `order_id`, `ptid`, `quantity`, `price`, `uomid`, `status`) VALUES
+(1, 3, 2, 10, 32.00, 2, '1'),
+(2, 4, 2, 100, 2.00, 1, '1');
 
 -- --------------------------------------------------------
 
@@ -646,7 +662,7 @@ CREATE TABLE `order_items` (
 --
 
 CREATE TABLE `payment` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `email` varchar(255) NOT NULL,
   `item_number` varchar(255) NOT NULL,
   `amount` double(10,2) NOT NULL,
@@ -654,27 +670,23 @@ CREATE TABLE `payment` (
   `txn_id` varchar(255) NOT NULL,
   `payment_status` varchar(255) NOT NULL,
   `payment_response` text NOT NULL,
-  `create_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
-
---
--- Table structure for table `pricelist`
---
 
 --
 -- Table structure for table `product`
 --
 
 CREATE TABLE `product` (
-  `pid` int(13) NOT NULL,
+  `pid` int NOT NULL,
   `productName` varchar(255) NOT NULL,
   `productBlurb` text NOT NULL,
   `status` enum('1','0') NOT NULL DEFAULT '1',
   `archive` enum('1','0') NOT NULL DEFAULT '0',
-  `cid` int(13) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `cid` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `product`
@@ -724,21 +736,21 @@ INSERT INTO `product` (`pid`, `productName`, `productBlurb`, `status`, `archive`
 --
 
 CREATE TABLE `producttype` (
-  `ptid` int(13) NOT NULL,
+  `ptid` int NOT NULL,
   `ptName` varchar(255) NOT NULL,
   `ptImage` varchar(255) NOT NULL,
-  `kilo` float(8,2) NOT NULL DEFAULT 0.00,
-  `box` float(8,2) NOT NULL DEFAULT 0.00,
-  `punnet` float(8,2) NOT NULL DEFAULT 0.00,
-  `bunch` float(8,2) NOT NULL DEFAULT 0.00,
-  `single` float(8,2) NOT NULL DEFAULT 0.00,
+  `kilo` float(8,2) NOT NULL DEFAULT '0.00',
+  `box` float(8,2) NOT NULL DEFAULT '0.00',
+  `punnet` float(8,2) NOT NULL DEFAULT '0.00',
+  `bunch` float(8,2) NOT NULL DEFAULT '0.00',
+  `single` float(8,2) NOT NULL DEFAULT '0.00',
   `ptBlurb` longtext NOT NULL,
   `ptReceipe` longtext NOT NULL,
   `status` enum('1','0') NOT NULL DEFAULT '1',
   `archive` enum('1','0') NOT NULL DEFAULT '0',
-  `pid` int(13) NOT NULL,
-  `cid` int(13) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `pid` int NOT NULL,
+  `cid` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `producttype`
@@ -806,17 +818,153 @@ INSERT INTO `producttype` (`ptid`, `ptName`, `ptImage`, `kilo`, `box`, `punnet`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `product_cost_price`
+--
+
+CREATE TABLE `product_cost_price` (
+  `pcid` int NOT NULL,
+  `ptid` int NOT NULL,
+  `uomid` tinyint(1) NOT NULL,
+  `cost_price` float(5,3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `product_cost_price`
+--
+
+INSERT INTO `product_cost_price` (`pcid`, `ptid`, `uomid`, `cost_price`) VALUES
+(1, 1, 1, 7.500),
+(2, 1, 2, 32.000),
+(3, 1, 5, 0.500),
+(4, 2, 1, 2.000),
+(5, 2, 2, 32.000),
+(6, 2, 5, 0.360),
+(7, 3, 1, 5.500),
+(8, 3, 2, 32.000),
+(9, 3, 5, 0.500),
+(10, 4, 1, 6.900),
+(11, 4, 2, 32.000),
+(12, 4, 5, 0.500),
+(13, 5, 1, 2.500),
+(14, 6, 1, 2.500),
+(15, 7, 1, 2.000),
+(16, 7, 2, 2.000),
+(17, 7, 1, 3.000),
+(18, 7, 4, 2.000),
+(19, 7, 5, 2.000),
+(20, 8, 1, 2.000),
+(21, 8, 2, 2.000),
+(22, 8, 1, 3.000),
+(23, 8, 4, 2.000),
+(24, 8, 5, 2.000),
+(25, 9, 1, 2.000),
+(26, 9, 2, 2.000),
+(27, 9, 1, 3.000),
+(28, 9, 4, 2.000),
+(29, 9, 5, 2.000),
+(30, 10, 1, 2.000),
+(31, 10, 2, 2.000),
+(32, 10, 1, 3.000),
+(33, 10, 4, 2.000),
+(34, 10, 5, 2.000),
+(35, 11, 1, 2.000),
+(36, 11, 2, 2.000),
+(37, 11, 1, 3.000),
+(38, 11, 4, 2.000),
+(39, 11, 5, 2.000),
+(40, 14, 1, 2.000),
+(41, 15, 1, 2.000),
+(42, 16, 1, 20.000),
+(43, 16, 2, 80.000),
+(44, 17, 1, 40.000),
+(45, 17, 2, 80.000),
+(46, 21, 1, 32.000),
+(47, 21, 2, 70.000),
+(48, 23, 1, 3.500),
+(49, 23, 2, 32.000),
+(50, 23, 5, 0.500),
+(51, 24, 2, 32.000),
+(52, 24, 5, 2.000),
+(53, 25, 1, 0.900),
+(54, 26, 1, 2.000),
+(55, 26, 2, 32.000),
+(56, 26, 5, 2.000),
+(57, 27, 1, 3.900),
+(58, 27, 2, 32.000),
+(59, 27, 5, 0.500),
+(60, 28, 2, 32.000),
+(61, 28, 5, 3.900),
+(62, 29, 1, 14.000),
+(63, 29, 1, 3.000),
+(64, 30, 1, 3.000),
+(65, 32, 1, 2.000),
+(66, 32, 2, 2.000),
+(67, 32, 1, 3.000),
+(68, 32, 4, 2.000),
+(69, 32, 5, 2.000),
+(70, 33, 1, 2.000),
+(71, 33, 2, 2.000),
+(72, 33, 1, 3.000),
+(73, 33, 4, 2.000),
+(74, 33, 5, 2.000),
+(75, 34, 1, 2.000),
+(76, 34, 2, 2.000),
+(77, 34, 1, 3.000),
+(78, 34, 4, 2.000),
+(79, 34, 5, 2.000),
+(80, 35, 1, 2.000),
+(81, 35, 2, 2.000),
+(82, 35, 1, 3.000),
+(83, 35, 4, 2.000),
+(84, 35, 5, 2.000),
+(85, 36, 5, 0.700),
+(86, 37, 1, 16.330),
+(87, 39, 1, 20.000),
+(88, 39, 1, 3.000),
+(89, 40, 1, 14.140),
+(90, 41, 2, 70.000),
+(91, 41, 5, 4.000),
+(92, 42, 1, 11.000),
+(93, 43, 5, 2.000),
+(94, 44, 2, 38.000),
+(95, 44, 5, 1.900),
+(96, 45, 1, 12.880),
+(97, 45, 5, 0.300),
+(98, 46, 2, 70.000),
+(99, 46, 5, 4.000),
+(100, 47, 5, 4.000),
+(101, 48, 5, 3.500),
+(102, 50, 1, 44.000),
+(103, 50, 1, 3.000),
+(104, 51, 5, 1.200),
+(105, 52, 5, 1.200),
+(106, 53, 1, 2.900),
+(107, 54, 5, 1.900),
+(108, 55, 1, 3.900),
+(109, 55, 5, 0.580),
+(110, 56, 1, 3.500),
+(111, 56, 2, 34.000),
+(112, 59, 4, 3.500),
+(113, 60, 1, 2.500),
+(114, 61, 1, 2.000),
+(115, 62, 1, 2.000),
+(116, 63, 5, 8.000),
+(117, 64, 2, 42.000);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `special`
 --
 
 CREATE TABLE `special` (
-  `sid` int(13) NOT NULL,
+  `sid` int NOT NULL,
   `specialTitle` varchar(255) NOT NULL,
   `specialBlurb` varchar(255) NOT NULL,
   `specialImage` varchar(255) NOT NULL,
-  `ptid` int(13) NOT NULL,
+  `ptid` int NOT NULL,
   `active` enum('1','0') NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `special`
@@ -833,11 +981,11 @@ INSERT INTO `special` (`sid`, `specialTitle`, `specialBlurb`, `specialImage`, `p
 --
 
 CREATE TABLE `supplier` (
-  `sid` int(13) NOT NULL,
+  `sid` int NOT NULL,
   `supplierName` varchar(255) NOT NULL,
-  `supplierPhone` int(13) NOT NULL,
+  `supplierPhone` int NOT NULL,
   `supplierAddress` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `supplier`
@@ -853,11 +1001,11 @@ INSERT INTO `supplier` (`sid`, `supplierName`, `supplierPhone`, `supplierAddress
 --
 
 CREATE TABLE `uom` (
-  `uomid` tinyint(4) NOT NULL,
+  `uomid` tinyint(1) NOT NULL,
   `uomName` varchar(255) NOT NULL,
   `uomShort` varchar(255) NOT NULL,
   `uomLong` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `uom`
@@ -877,23 +1025,25 @@ INSERT INTO `uom` (`uomid`, `uomName`, `uomShort`, `uomLong`) VALUES
 --
 
 CREATE TABLE `user` (
-  `uid` int(11) NOT NULL,
+  `uid` int NOT NULL,
   `fName` varchar(100) NOT NULL,
   `lName` varchar(100) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `comment` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `comment` varchar(255) NOT NULL,
+  `access` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`uid`, `fName`, `lName`, `email`, `password`, `comment`) VALUES
-(1, '', '', 'scot.henderson@outlook.com', '1234', ''),
-(2, '', '', 'slim@fastnfreshproduce.com.au', '1234', ''),
-(3, '', '', 'kate@fastnfreshproduce.com.au', '1234', ''),
-(3, '', '', 'admin@fastnfreshproduce.com.au', 'admin', '');
+INSERT INTO `user` (`uid`, `fName`, `lName`, `email`, `username`, `password`, `comment`, `access`) VALUES
+(1, '', '', 'scot.henderson@outlook.com', 'scot', '1234', '', 1),
+(2, '', '', 'slim@fastnfreshproduce.com.au', '', '1234', '', 0),
+(3, '', '', 'kate@fastnfreshproduce.com.au', '', '1234', '', 0),
+(4, '', '', 'admin@fastnfreshproduce.com.au', '', 'admin', '', 0);
 
 -- --------------------------------------------------------
 
@@ -902,43 +1052,21 @@ INSERT INTO `user` (`uid`, `fName`, `lName`, `email`, `password`, `comment`) VAL
 --
 
 CREATE TABLE `users` (
-  `uid` int(11) NOT NULL,
-  `oauth_provider` enum('facebook','google','twitter','') COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `oauth_uid` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `first_name` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `last_name` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `phone` text COLLATE utf8_unicode_ci NOT NULL,
-  `gender` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `picture` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `link` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `uid` int NOT NULL,
+  `oauth_provider` enum('facebook','google','twitter','') CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `oauth_uid` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `first_name` varchar(25) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `last_name` varchar(25) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `phone` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `gender` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `picture` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `link` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
-  `active` enum('1','0') COLLATE utf8_unicode_ci NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`uid`, `oauth_provider`, `oauth_uid`, `first_name`, `last_name`, `password`, `email`, `phone`, `gender`, `picture`, `link`, `created`, `modified`, `active`) VALUES
-(1, '', '', 'Scot', 'Henderson', '', 'scot.henderson@outlook.com', '0413482763', NULL, '', '', '2021-01-20 18:27:45', '0000-00-00 00:00:00', '1'),
-(2, '', '', '', '', '1234', 'kate.hawkins@hotmail.com', '', NULL, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1'),
-(3, '', '', '', '', '1234', 'slim@hotmail.com', '', NULL, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1'),
-(4, '', '', '', '', '', '', '', NULL, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1'),
-(5, '', '', '', '', '1234', 'karen.hopkins@sa.gov.au', '', NULL, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1'),
-(6, '', '', '', '', '1234', 'kate.hawkins@hotmail.com', '', NULL, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1'),
-(7, '', '', '', '', '1234', 'anw@lkfdj.com', '', NULL, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1'),
-(8, '', '', '', '', '', '', '', NULL, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1'),
-(9, '', '', '', '', '', '', '', NULL, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1'),
-(10, '', '', '', '', '1234', 'anw@lkfdj.com', '', NULL, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1'),
-(11, '', '', '', '', '', '', '', NULL, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1'),
-(12, '', '', '', '', '', '', '', NULL, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1'),
-(13, '', '', '', '', '', '', '', NULL, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1'),
-(14, '', '', '', '', '1234', 'anw@lkfdj.com', '', NULL, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1'),
-(15, '', '', '', '', '1234', 'scot.henderson@outlook.com', '', NULL, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1'),
-(16, '', '', '', '', '1234', 'anyone@anywhere.com', '', NULL, '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+  `active` enum('1','0') CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 
 --
 -- Indexes for dumped tables
@@ -1007,6 +1135,12 @@ ALTER TABLE `producttype`
   ADD PRIMARY KEY (`ptid`);
 
 --
+-- Indexes for table `product_cost_price`
+--
+ALTER TABLE `product_cost_price`
+  ADD PRIMARY KEY (`pcid`);
+
+--
 -- Indexes for table `special`
 --
 ALTER TABLE `special`
@@ -1044,107 +1178,61 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `business`
 --
 ALTER TABLE `business`
-  MODIFY `bid` int(13) NOT NULL AUTO_INCREMENT;
+  MODIFY `bid` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `cid` int(13) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `cid` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `fnfbusiness`
---
-ALTER TABLE `fnfbusiness`
-  MODIFY `business_ID` int(13) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
-
---
--- AUTO_INCREMENT for table `fnfcustomer`
---
-ALTER TABLE `fnfcustomer`
-  MODIFY `customer_ID` int(13) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=320;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `payment`
---
-ALTER TABLE `payment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `pid` int(13) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `pid` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
--- AUTO_INCREMENT for table `producttype`
+-- AUTO_INCREMENT for table `product_cost_price`
 --
-ALTER TABLE `producttype`
-  MODIFY `ptid` int(13) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+ALTER TABLE `product_cost_price`
+  MODIFY `pcid` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
 
 --
 -- AUTO_INCREMENT for table `special`
 --
 ALTER TABLE `special`
-  MODIFY `sid` int(13) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `sid` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `supplier`
 --
 ALTER TABLE `supplier`
-  MODIFY `sid` int(13) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `sid` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `uom`
 --
 ALTER TABLE `uom`
-  MODIFY `uomid` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `user`
---
-ALTER TABLE `user`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `orders`
---
-ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
-
---
--- Constraints for table `order_items`
---
-ALTER TABLE `order_items`
-  ADD CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+  MODIFY `uomid` tinyint(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

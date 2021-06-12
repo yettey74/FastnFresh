@@ -29,48 +29,50 @@ function categoryHasVariety( $conn, $cid ){
 	return $row['count'];		
 }
 
+
 function getMinimumPriceandUom( $conn, $ptid ){
-	$q = $conn->query("SELECT cost_price, uom_id
+	$q = $conn->query("SELECT cost_price, uomid
 						FROM product_cost_price
 						WHERE cost_price = ( SELECT MIN(cost_price) 
 											 FROM product_cost_price ) 
 						&& `enddate` IS NULL ");	
 	$row = $q->fetch();
-	return array( $row['uom_id'] , $row['cost_price']);	
+	return array( $row['uomid'] , $row['cost_price']);	
 }
 
-/*function getMinimumUom( $conn, $ptid )	{
-	$q = $conn->query("SELECT uom_id FROM `product_cost_price` WHERE `ptid` = '$ptid' && `enddate` IS NULL && `cost_price` = MIN('cost_price') ");	
+function getMinimumUom( $conn, $ptid )	{
+	$q = $conn->query("SELECT uomid FROM `product_cost_price` WHERE `ptid` = '$ptid' && `enddate` IS NULL && `cost_price` = MIN('cost_price') ");	
 	$row = $q->fetch();
-	return $row['uom_id'];	
-}*/
+	return $row['uomid'];	
+}
 
 function getMinimumPrice( $conn, $ptid ){
-	$q = $conn->query("SELECT MIN(`cost_price`) AS min_price FROM `product_cost_price` WHERE `ptid` = '$ptid' && `enddate` IS NULL ");	
+	$q = $conn->query("SELECT MIN(`cost_price`) AS min_price FROM `product_cost_price` WHERE `ptid` = '$ptid' ");	
 	$row = $q->fetch();
 	return $row['min_price'];	
 }
 
 function getUomAndPrices( $conn, $ptid ){
 	$array = array();
-	$q = $conn->query("SELECT `uom_id`, `cost_price` FROM `product_cost_price` WHERE `ptid` = '$ptid' && `enddate` IS NULL ");	
+	$q = $conn->query("SELECT `uomid`, `cost_price` FROM `product_cost_price` WHERE `ptid` = '$ptid' ");	
 	foreach( $q as $r ){
-		$array[$r['uom_id'] ] = $r['cost_price'];
+		$array[$r['uomid'] ] = $r['cost_price'];
 	}
 	return $array;
 }
 
-function getUom_ids( $conn ){
-	$array = [];
-	$q = $conn->query( "SELECT uom_id FROM `uom`" );
+
+function getuomids( $conn ){
+	$array = [];	
+	$q = $conn->query( "SELECT uomid FROM `uom`" );
 	foreach( $q as $r ){
-		$array[] = $r['uom_id'];
+		$array[] = $r['uomid'];
 	}
 	return $array;
 }
 
-function getUomLong( $conn, $uom_id ){
-	$q = $conn->query("SELECT `uomLong` FROM `uom` WHERE `uom_id` = '$uom_id' ");
+function getUomLong( $conn, $uomid ){
+	$q = $conn->query("SELECT `uomLong` FROM `uom` WHERE `uomid` = '$uomid' ");
 	$q->execute();
 	$row = $q->fetch();
 	
@@ -78,14 +80,15 @@ function getUomLong( $conn, $uom_id ){
 }
 
 function isPrice( $conn, $ptid ){
-	$q = $conn->query("SELECT COUNT(*) AS count FROM `product_cost_price` WHERE `ptid` = '$ptid' && `endDate` IS NULL");
+	$q = $conn->query("SELECT COUNT(*) AS count FROM `product_cost_price` WHERE `ptid` = '$ptid'");
 	$q->execute();
 	$row = $q->fetch();
 	
 	return $row['count'];
 }
-function getUom_price( $conn, $uom_id, $ptid ){
-	$q = $conn->query( "SELECT cost_price FROM `product_cost_price` WHERE `ptid` = '$ptid' && `uom_id` = '$uom_id' && `enddate` IS NULL");
+
+function getUom_price( $conn, $uomid, $ptid ){
+	$q = $conn->query( "SELECT cost_price FROM `product_cost_price` WHERE `ptid` = '$ptid' && `uomid` = '$uomid'");
 	$q->execute();
 	$row = $q->fetch();
 	
@@ -116,32 +119,33 @@ function getCategoryimage( $conn, $cid ){
 
 
 
-function isVarietyCostPrice( $conn, $ptid, $uom_id ){
+function isVarietyCostPrice( $conn, $ptid, $uomid ){
 	
-	$q = $conn->query("SELECT COUNT(*) AS count FROM `product_cost_price` WHERE `ptid` = '$ptid' && `uom_id` = '$uom_id' && `endDate` IS NULL ");
+	$q = $conn->query("SELECT COUNT(*) AS count FROM `product_cost_price` WHERE `ptid` = '$ptid' && `uomid` = '$uomid' && `endDate` IS NULL ");
+	return ($q->fetchColumn())?  TRUE : FALSE;
+} 
+
+function insertCostPrice( $conn, $ptid, $uomid, $price ){
+	$q = $conn->query("INSERT INTO `product_cost_price` (`po_id`, `ptid`, `uomid`, `cost_price`, `startDate`) 
+						VALUES ('1', '$ptid', '$uomid', '$price', Now() )");
 	return ($q->fetchColumn())?  TRUE : FALSE;
 }
 
-function insertCostPrice( $conn, $ptid, $uom_id, $price ){
-	$q = $conn->query("INSERT INTO `product_cost_price` (`po_id`, `ptid`, `uom_id`, `cost_price`, `startDate`) 
-						VALUES ('1', '$ptid', '$uom_id', '$price', Now() )");
-	return ($q->fetchColumn())?  TRUE : FALSE;
-}
-
-function updateCostPrice ( $conn, $ptid, $uom_id, $price ){	
-	$q = $conn->query("UPDATE `product_cost_price` SET `endDate` = NOW() WHERE `ptid` = '$ptid' && `uom_id` = '$uom_id'");
+function updateCostPrice ( $conn, $ptid, $uomid, $price ){	
+	$q = $conn->query("UPDATE `product_cost_price` SET `endDate` = NOW() WHERE `ptid` = '$ptid' && `uomid` = '$uomid'");
 	return ( $q->fetchColumn() )? true : false ;	
 }
 
-function getRRP( $conn, $ptid, $uom_id ){
+function getRRP( $conn, $ptid, $uomid ){
 	$price = 0;
-	$q = $conn->query("SELECT `cost_price` FROM `product_cost_price` WHERE `ptid` = '$ptid' && `uom_id` = '$uom_id' && endDate IS NULL");
+	$q = $conn->query("SELECT `cost_price` FROM `product_cost_price` WHERE `ptid` = '$ptid' && `uomid` = '$uomid' && endDate IS NULL");
 	foreach( $q as $r ){
 		$price = $r['cost_price'];
 	}
 	
 	return $price;
 }
+
 
 function insertLog( $conn, $event ){
 	$str = print_r($event);

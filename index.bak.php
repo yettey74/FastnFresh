@@ -59,16 +59,12 @@ $cart = new Cart;
 			<?php 			
 				$items = $cart->contents();
 				$specials = getSpecialCount( $conn );
-
 				include( 'slide.php' );
-
 				echo '<div class="clear"></div>';
-
 				if ( $specials > 0 ){
 					include 'specials.php';
 					echo '<div class="clear"></div>';
 				}
-
 $categoryQ = "SELECT * FROM `category` WHERE `status` = 1";
 $categoryR = $conn->query($categoryQ);
 /* foreach( $categoryR as $cat )
@@ -82,24 +78,34 @@ if( $categoryR !== false ) {
 
 		$cid = $category['cid'];
 
+		echo $cid;
+
 		if( categoryHasVariety( $conn, $cid ) > 0 ){
 			echo '<button class="accordion" style="background-color: lightgreen; font-style:strong;">
 					<img src="images/' . $category['categoryImage'] . '" width=50px; height=50px; />'
 					 . $category['categoryName'] 
-					 . '</button>';			
-			echo '<div class="panel">';
-				echo '<div class="productRow">';
-				$productTypeQ = "SELECT `p`.`productName`, `pt`.`ptid`, `pt`.`ptName`, `pt`.`ptImage`, `pt`.`ptBlurb` 
-								FROM `producttype` AS `pt`
-								LEFT JOIN `product` AS `p`
-								ON `p`.`pid` = `pt`.`pid`
-								WHERE `pt`.`cid` = '$cid' 
-								&& `pt`.`status` = '1' 
-								&& `pt`.`archive` = '0' 
-								GROUP BY `p`.`pid`, `pt`.`ptname`";
+					 . '</button>';
+			?>
+			<div class="panel">
+			<?php
+			$productTypeQ = "SELECT `p`.`productName`, `pt`.`ptid`, `pt`.`ptName`, `pt`.`ptImage`, `pt`.`ptBlurb` 
+							 FROM `producttype` AS `pt`
+							 LEFT JOIN `product` AS `p`
+							 ON `p`.`pid` = `pt`.`pid`
+							 WHERE `pt`.`cid` = '$cid' 
+							 && `pt`.`status` = '1' 
+							 && `pt`.`archive` = '0' 
+							 GROUP BY `p`.`pid`, `pt`.`ptname`";
 
-				$productTypeR = $conn->query($productTypeQ);
-
+			$productTypeR = $conn->query($productTypeQ);
+			foreach( $productTypeR as $pt )
+			{
+				echo $pt;
+			}
+			if( $productTypeR !== false ) {
+				?>
+				<div class="productRow">
+				<?php					
 				foreach($productTypeR as $productType) {
 					$ptid = $productType['ptid'];
 					$ptName = $productType['ptName'];
@@ -108,9 +114,24 @@ if( $categoryR !== false ) {
 					$isPrice = isPrice( $conn, $ptid );
 					$thisQty = '0';
 					$row_id = '0';
-					
-					echo '<form action="cartAction.php" method="get">';
-					echo '<div class="child-left">';
+
+					foreach( $items as $item ){
+						if( $item['id'] == $ptid ){
+							$thisQty = $item['qty'];
+						}
+					}					
+
+					if( $isPrice ) {
+						foreach( $items as $item ){
+							if( $item['id'] == $ptid ){
+								$row_id = $item['rowid'];
+							}
+						}
+
+						echo '<form action="cartAction.php" method="post">';
+					?>
+						<div class="child-left">
+						<?php
 						echo '<div class="productImage">';				
 						if ( !empty($ptImage)){
 							echo '<div style="text-align: center; color:black;"><img src="images/' . $ptImage . '" width=25px; height=25px; />' . $ptName . '</div>';					
@@ -118,31 +139,30 @@ if( $categoryR !== false ) {
 							echo '<div style="text-align: center; color:black;">' . $ptid . '</div>';
 						}							
 						echo '</div>';
-						echo '<div class="productAmount" style="float:left;">';
-						echo '<label>Amount</label><br>';
-						echo '<input class="form-control" type="number" name="qty" min="0" value="' . $thisQty . '"/>';
-						echo '</div>';
 						?>
+						<div class="productAmount" style="float:left;">
+							<label>Amount</label><br>
+								<input class="form-control" type="number" name="qty" min="0" value="<?php echo $thisQty; ?>"/>
+						</div>
+
 						<div class="productUOM" style="float:left;">		
 							<label>Unit</label><br>
 							<select name="unitType" tabindex="">
 							<?php
 							// load this from the db and not from the cached cart
-							// echo '<option value="" selected="">Weigh By</option>';
-							$uom_ids = getuomids( $conn );
+							//echo '<option value="" selected="">Weigh By</option>';
+							$uom_ids = getUom_ids( $conn );
 
 							foreach( $uom_ids as $uom_id ){
 								$price = getUom_price( $conn, $uom_id, $ptid );
 								$uomLong = getUomLong( $conn, $uom_id );
-								
 								if( $price > 0 ){
 									if( $price == $item['price']){
 										echo '<option value="' . $uom_id . '" selected="">' . $uomLong . ' $' . number_format( $price, 2, '.', ',') . '</option>';	
 									} else {
 										echo '<option value="' . $uom_id . '">' . $uomLong . ' $' . number_format( $price, 2, '.', ',') . '</option>';
 									}
-								} 
-								
+								}
 							}	
 							?>
 							</select>
@@ -157,23 +177,27 @@ if( $categoryR !== false ) {
 						echo '<div class="clear"></div>';
 						echo '<input type="hidden" name="row_id" value="' . $row_id . '"/>';
 						echo '<input type="hidden" name="ptid" value="' . $ptid . '"/>';
-						/* echo '<input type="hidden" name="thisQty" value="' . $thisQty . '"/>'; */
+					/*	echo '<input type="hidden" name="thisQty" value="' . $thisQty . '"/>';*/
 						echo '<div class="addToCart" style="text-align: center; content-align:center;">';
-								echo '<button type="submit" class="btn btn-sm btn-default" name="addToCartFrontPage" value="">';
-								echo '<img src="images/basket_green.png" width="50px" height="50px" alt="Add to Cart" title="Add to Cart" />';
-								echo '</button>';
-							echo '</div>';
-					echo '</div>';
-					echo '</form>';
-				}
-			
-				echo '</div> <!-- END PRODCT ROW CLASS -->';
-				echo '<div class="clear"></div>';
-			echo '</div> <!-- END PANEL CLASS -->'; 
+							echo '<button type="submit" class="btn btn-sm btn-default" name="addToCartFrontPage" value="">';
+							echo '<img src="images/basket_green.png" width="50px" height="50px" alt="Add to Cart" title="Add to Cart" />';
+							echo '</button>';
+						echo '</div>';
+						echo '</form>';
+					?></div><?php // END child-left
+					} 
+				} 			
+			?>
+		</div>
+			<div class="clear"></div>
+			<?php
+			} 
+			?></div><?php // END PANEL CLASS
 		}
 	}
 }
-?>
+
+include( 'menu.php' ); ?>
    
 <script>
 var acc = document.getElementsByClassName("accordion");
@@ -191,7 +215,5 @@ for (i = 0; i < acc.length; i++) {
   });
 }
 </script>
-<?php 
-include( 'menu.php' ); ?>
 </body>
 </html>

@@ -28,49 +28,52 @@ $cart = new Cart;
   <script src="js/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<script type="text/javascript" language="javascript" src="js/slide.js" ></script>
+
 	<style>
 		.carousel-inner > .item > img, .carousel-inner > .item > a > img { width: 20%;
 											margin: auto;
 										  }
 	</style>
 		
-<style>
-::placeholder {
-  color: black;
-  opacity: 1; /* Firefox */
-}
-
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
- color: black;
-}
-
-::-ms-input-placeholder { /* Microsoft Edge */
- color: black;
-}
-</style>
-<script type="text/javascript">
-function updateCartItem(obj,id){
-    $.get("cartAction.php", {action:"updateCartItem", id:id, qty:obj.value}, function(data){
-        if(data == 'ok'){
-            location.reload();
-        }else{
-            alert('Cart update failed, please try again.');
+    <style>
+        ::placeholder {
+        color: black;
+        opacity: 1; /* Firefox */
         }
-    });
-}
-</script>
-<script>
-function updateCartPrice(obj, id){	
-    $.get("cartAction.php", {action:"updateCartPrice", id:id, price:obj.value }, function(data){
-        if(data == 'ok'){
-            location.reload();
-        }else{
-            alert('Cart update failed, please try again.');
+
+        :-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: black;
         }
-    });
-}
-</script>
-	
+
+        ::-ms-input-placeholder { /* Microsoft Edge */
+        color: black;
+        }
+    </style>
+
+    <script type="text/javascript">
+    function updateCartItem( obj, id ){
+        $.get("cartAction.php", {action:"updateCartItem", id:id, qty:obj.value}, function(data){
+            if(data == 'ok'){
+                location.reload();
+            }else{
+                alert('Cart update failed, please try again.');
+            }
+        });
+    }
+    </script>
+
+    <script>
+    function updateCartPrice(obj, id){	
+        $.get("cartAction.php", {action:"updateCartPrice", id:id, price:obj.value }, function(data){
+            if(data == 'ok'){
+                location.reload();
+            }else{
+                alert('Cart update failed, please try again.');
+            }
+        });
+    }
+    </script>
+
 <style>
 /* Formatting search box */
     .search-box{
@@ -120,7 +123,7 @@ function updateCartPrice(obj, id){
     }
 </style>
 	<script type="text/javascript">
-$(document).ready(function(){
+    $(document).ready(function(){
     $('.search-box input[type="text"]').on("keyup input", function(){
         /* Get input value on change */
         var inputVal = $(this).val();
@@ -159,19 +162,27 @@ $(document).ready(function(){
 <div class="shop">
 <div class="container">
 	<div class="search-box">
-        <input type="text" autocomplete="off" placeholder="Add Product ..." />
+        <input type="text" autocomplete="off" placeholder="Find Product ..." />
         <div class="result"></div>
-      </div>
+    </div>
     <h1>Your Cart</h1>
 	<?php
-/*	if( $cart->total_items() > 0 ){
+
+  /* 
+  DEBUG
+    echo ($cart)? 'true':'false';
+    echo '<br>';
+    echo ($cart->total_items() > 0)? 'true':'false';
+  */
+
+/* 	if( $cart->total_items() > 0 ){
 		$cartArray = $cart->contents();
 		foreach( $cartArray as $arrayItems ){
 			foreach( $arrayItems as $key=>$value ){
 				echo $key . ' => ' . $value .'<br>';
 			}
 		}
-	}	*/
+	} */	
 	?>
     <div class="row">
         <div class="cart">
@@ -289,6 +300,6 @@ $(document).ready(function(){
     </div>
 </div>
 </div> <!-- END OF SHOP CLASS -->
-<?php include( 'menu.php');?>
+<?php include( 'menu.php' );?>
 </body>
 </html>

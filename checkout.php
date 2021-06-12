@@ -50,13 +50,11 @@ if( !empty( $sessData['status']['msg'] ) ){
     <h1>CHECKOUT</h1>
 	<?php
 	$cartArray = $cart->contents();
-	foreach( $cartArray as $arrayItems ){
+	/* foreach( $cartArray as $arrayItems ){
 			foreach( $arrayItems as $key => $value ){
 				echo $key . ' => ' . $value .'<br>';
 			}
-		}
-	
-	
+		} */
 	?>
     <div class="col-12">
         <div class="checkout">

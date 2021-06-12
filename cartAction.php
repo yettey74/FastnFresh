@@ -36,11 +36,11 @@ if( isset( $_REQUEST['addToCartFrontPage'] ) && isset( $_REQUEST['ptid'] ) && is
 
 		$itemType = array();
 
-		$query = $conn->query("SELECT `uom_id`, `cost_price` FROM `product_cost_price` WHERE `ptid` = '$ptid' && `endDate` IS NULL "); 
+		$query = $conn->query("SELECT `uomid`, `cost_price` FROM `product_cost_price` WHERE `ptid` = '$ptid' "); 
 		$result = $query->execute();
 
 		for( $i=0; $price = $query->fetch(); $i++ ){
-			$itemType[ $price['uom_id'] ] = $price['cost_price'];
+			$itemType[ $price['uomid'] ] = $price['cost_price'];
 		}
 
 		$price = getUom_price( $conn, $uom_id, $ptid );
@@ -88,11 +88,11 @@ if( isset( $_REQUEST['action'] ) && !empty( $_REQUEST['action'] ) ){
 		
 		$itemType = array();
 		
-		$query = $conn->query("SELECT `uom_id`, `cost_price` FROM `product_cost_price` WHERE `ptid` = '$ptid' && `endDate` = 'NULL' "); 
+		$query = $conn->query("SELECT `uomid`, `cost_price` FROM `product_cost_price` WHERE `ptid` = '$ptid' "); 
 		$result = $query->execute();
 		
 		for( $i=0; $price = $query->fetch(); $i++ ){
-			$itemType[ $price['uom_id'] ] = $price['cost_price'];
+			$itemType[ $price['uomid'] ] = $price['cost_price'];
 		}
 	
 		//compare the array to find lowest price as starting point
@@ -218,7 +218,7 @@ if( isset( $_REQUEST['action'] ) && !empty( $_REQUEST['action'] ) ){
 		$customer_id = $_REQUEST['customer_id'];
 			       
                 // Insert order info in the database 
-                $insertOrder = $conn->query("INSERT INTO orders ( customer_id, grand_total, created_on, status) VALUES ( '$customer_id', '" . $cart->total() . "', NOW(), 'Pending')"); 
+                $insertOrder = $conn->query("INSERT INTO `orders` ( `customer_id`, `grand_total`, `created_on`, `status`) VALUES ( '".$customer_id."', '" . $cart->total() . "', NOW(), 'Pending')"); 
 		
                 if( $insertOrder !== FALSE ){
 					
@@ -232,7 +232,7 @@ if( isset( $_REQUEST['action'] ) && !empty( $_REQUEST['action'] ) ){
                     $sql = ''; 
 					
                     foreach( $cartItems as $item ){ 
-                        $sql .= "INSERT INTO order_items (order_id, ptid, quantity, price, uom_id, status) VALUES ('".$orderID."', '".$item['id']."', '".$item['qty']."', '".$item['price']."', '".$item['type']."', '1');"; 
+                        $sql .= "INSERT INTO order_items (order_id, ptid, quantity, price, uomid, status) VALUES ('".$orderID."', '".$item['id']."', '".$item['qty']."', '".$item['price']."', '".$item['type']."', '1');"; 
                     } 
                      
                     // Insert order items in the database 
