@@ -68,9 +68,8 @@ position: absolute;
 }
 
 .panel {
-  padding: 0 0px;
+  padding-left: 50px;
   display: none;
-  background-color: #fedeb1;
   border-radius: 25px;
   overflow: hidden;
 }
@@ -89,9 +88,19 @@ position: absolute;
   float: left;
   width: 200px;
   height: 350px;
-  padding: 15px;  
-  padding-bottom: 25px
+  padding: 25px;
+  background-color: lightgray;
 }
+
+.child-next{
+	border-spacing:10px;
+	border-radius: 25px;
+	border-style: groove;
+	float: right;
+	width: 200px;
+	height: 350px;
+	padding: 25px
+  }
 
 .container {
 	width: auto;
@@ -111,13 +120,18 @@ position: absolute;
     background-attachment: fixed;
 }
 .productRow{
+/* 	margin: 2rem;
+	border: 2rem;
+	padding: 2rem; */
+
 	width: 100%;
-	height: 250px;
+	height: 350px;
 }
 
 .productRowButtons{
 	width: 100%;
 	height: 50px;
+	align-content: center;
 }
 
 
@@ -151,6 +165,7 @@ position: absolute;
 	text-align: left;
 	margin: 15px;
 }
+
 .productBlurb{
 	text-align: left;
 	margin: 15px;
@@ -209,7 +224,7 @@ position: absolute;
 }
 
 .quick{
-	backround: #000000;
+	background-color: #000000;
 	border-radius: 11px;
 	padding: 20px 45px;
 	color: #08FF08;

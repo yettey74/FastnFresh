@@ -22,11 +22,15 @@ $cart = new Cart;
   <link rel="shortcut icon" href="favicon.ico">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script> -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <script defer src="js/all.js"></script>
   <!-- jQuery library -->
   <script src="js/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+  <script src="js/bootstrap.min.js"></script>
+
 	<script type="text/javascript" language="javascript" src="js/slide.js" ></script>
 	
 	<style>
@@ -76,6 +80,7 @@ $categoryR = $conn->query($categoryQ);
 	echo $cat['cid'];
 } */
 
+$counter = 0;
 if( $categoryR !== false ) {
 
 	foreach( $categoryR as $category){
@@ -109,8 +114,13 @@ if( $categoryR !== false ) {
 					$thisQty = '0';
 					$row_id = '0';
 					
+					if( $counter == 0 ){
+						echo '<div class="child-left">';
+						//$counter++;
+					} else {
+						echo '<div class="child-next">';
+					}
 					echo '<form action="cartAction.php" method="get">';
-					echo '<div class="child-left">';
 						echo '<div class="productImage">';				
 						if ( !empty($ptImage)){
 							echo '<div style="text-align: center; color:black;"><img src="images/' . $ptImage . '" width=25px; height=25px; />' . $ptName . '</div>';					
@@ -148,12 +158,17 @@ if( $categoryR !== false ) {
 							</select>
 						</div>
 						<?php
+
 						echo '<div class="clear"></div>';
+
+						/* echo '<div class="productBlurb">';
 						if ( !empty($ptBlurb)){
-							echo '<div class="productBlurb" style="text-align: center;"><textarea">' . $ptBlurb . '</textarea></div>';
+							echo '<div style="text-align: center;"><textarea">' . $ptBlurb . '</textarea></div>';
 						} else {
-							echo '<div class="productBlurb" style="text-align: center;"><textarea">No Blurb to Blurb about.</textarea></div>';
+							echo '<div style="text-align: center;"><textarea">No Blurb to Blurb about.</textarea></div>';
 						}
+						echo '</div>'; */
+
 						echo '<div class="clear"></div>';
 						echo '<input type="hidden" name="row_id" value="' . $row_id . '"/>';
 						echo '<input type="hidden" name="ptid" value="' . $ptid . '"/>';
@@ -163,9 +178,10 @@ if( $categoryR !== false ) {
 								echo '<img src="images/basket_green.png" width="50px" height="50px" alt="Add to Cart" title="Add to Cart" />';
 								echo '</button>';
 							echo '</div>';
+						echo '</form>';
 					echo '</div>';
-					echo '</form>';
 				}
+				$counter = 0;
 			
 				echo '</div> <!-- END PRODCT ROW CLASS -->';
 				echo '<div class="clear"></div>';
