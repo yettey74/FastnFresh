@@ -120,19 +120,25 @@ if( $categoryR !== false ) {
 					} else {
 						echo '<div class="child-next">';
 					}
+
 					echo '<form action="cartAction.php" method="get">';
 						echo '<div class="productImage">';				
 						if ( !empty($ptImage)){
-							echo '<div style="text-align: center; color:black;"><img src="images/' . $ptImage . '" width=25px; height=25px; />' . $ptName . '</div>';					
+							echo '<div style="text-align: center; color:black;"><img src="images/' . $ptImage . '" width="25px" height="25px" alt="' . $ptName . '" title="' . $ptName . '" /></div>';					
 						} else {
 							echo '<div style="text-align: center; color:black;">' . $ptid . '</div>';
 						}							
 						echo '</div>';
-						echo '<div class="productAmount" style="float:left;">';
+						echo '<div class="productName">';
+						echo $ptName;
+						echo '</div>';
+
+						echo '<div class="productAmount" style="float:left;">';						
 						echo '<label>Amount</label><br>';
 						echo '<input class="form-control" type="number" name="qty" min="0" value="' . $thisQty . '"/>';
 						echo '</div>';
 						?>
+						
 						<div class="productUOM" style="float:left;">		
 							<label>Unit</label><br>
 							<select name="unitType" tabindex="">
@@ -170,14 +176,15 @@ if( $categoryR !== false ) {
 						echo '</div>'; */
 
 						echo '<div class="clear"></div>';
+
 						echo '<input type="hidden" name="row_id" value="' . $row_id . '"/>';
 						echo '<input type="hidden" name="ptid" value="' . $ptid . '"/>';
 						/* echo '<input type="hidden" name="thisQty" value="' . $thisQty . '"/>'; */
-						echo '<div class="addToCart" style="text-align: center; content-align:center;">';
-								echo '<button type="submit" class="btn btn-sm btn-default" name="addToCartFrontPage" value="">';
-								echo '<img src="images/basket_green.png" width="50px" height="50px" alt="Add to Cart" title="Add to Cart" />';
-								echo '</button>';
-							echo '</div>';
+						echo '<div class="productSubmit" style="text-align: center; content-align:center;">';
+							echo '<button type="submit" class="btn btn-sm btn-default" name="addToCartFrontPage" value="">';
+							echo '<img src="images/basket_green.png" width="50px" height="50px" alt="Add to Cart" title="Add to Cart" />';
+							echo '</button>';
+						echo '</div>';
 						echo '</form>';
 					echo '</div>';
 				}

@@ -22,11 +22,14 @@ $cart = new Cart;
   <link rel="shortcut icon" href="favicon.ico">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script> -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <script defer src="js/all.js"></script>
   <!-- jQuery library -->
   <script src="js/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+  <script src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" language="javascript" src="js/slide.js" ></script>
 
 	<style>
@@ -277,7 +280,7 @@ $cart = new Cart;
             <div class="col mb-2">
                 <div class="row">
                     <div class="col-sm-12  col-md-6">
-                        <a href="index.php" class="btn btn-lg btn-block btn-warning">Continue Shopping</a>
+                        <a href="index.php" class="btn btn-lg btn-block btn-warning">Go Shopping</a>
                     </div>
                     <div class="col-sm-12 col-md-6 text-right">
                         <?php 
