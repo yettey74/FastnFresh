@@ -43,6 +43,6 @@ $q = $conn->prepare($sql);
 /*$q->execute( array( ':a'=>$a, ':b'=>$b, ':c'=>$c, ':d'=>$d, ':e'=>$e, ':f'=>$f, ':g'=>$g, ':h'=>$h, ':i'=>$i, ':j'=>$j, ':k'=>$k, ':l'=>$l, ':m'=>$m, ':n'=>$n, ':o'=>$o, ':p'=>$p, ':q'=>$q, ':r'=>$r, ':s'=>$s, ':t'=>$t, ':u'=>$u, ':v'=>$v, ':w'=>$w, ':x'=>$x, ':y'=>$y, ':z'=>$z, ':aa'=>$aa, ':ab'=>$ab, ':ac'=>$ac, ':ad'=>$ad ) );*/
 
 $q->execute( array( ':a'=>$a,':b'=>$b,':c'=>$c,':d'=>$d,':e'=>$e,':f'=>$f,':g'=>$g, ':h'=>$h, ':i'=>$i, ':j'=>$j, ':k'=>$k, ':l'=>$l, ':m'=>$m, ':n'=>$n, ':o'=>$o, ':p'=>$p, ':r'=>$r, ':s'=>$s, ':t'=>$t, ':u'=>$u, ':v'=>$v, ':w'=>$w, ':x'=>$x, ':y'=>$y, ':z'=>$z, ':aa'=>$aa, ':ac'=>$ac, ':ad'=>$ad ) );
+
 header("location: customerView.php");
-//echo $sql;
 ?>
