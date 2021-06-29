@@ -199,6 +199,7 @@ input[type="submit"] {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#Fedeb1', endColorstr='#00ff00', GradientType=0);
     /* IE6-9 */
 }
+
 input[type="submit"]:hoover {
 	color: blue;
 	transition: 0.7;
@@ -353,6 +354,7 @@ h2 {
 	top: 100%;
 	left: 0;
 }
+
 .search-box input[type="text"], .result{
 	width: 100%;
 	box-sizing: border-box;
